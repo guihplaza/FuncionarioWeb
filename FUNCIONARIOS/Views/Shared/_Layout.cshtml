@@ -3,29 +3,42 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - FUNCIONARIOS</title>
+    <title>@ViewData["Title"] </title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="~/lib/assets/css/normalize.css">
+    <link rel="stylesheet" href="~/lib/assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/lib/assets/css/fontello.css">
+    <link href="~/lib/assets/fonts/icon-7-stroke/css/pe-icon-7-stroke.css" rel="stylesheet">
+    <link href="~/lib/assets/fonts/icon-7-stroke/css/helper.css" rel="stylesheet">
+    <link href="~/lib/assets/css/animate.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="~/lib/assets/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/lib/assets/css/icheck.min_all.css">
+    <link rel="stylesheet" href="~/lib/assets/css/price-range.css">
+    <link rel="stylesheet" href="~/lib/assets/css/owl.carousel.css">
+    <link rel="stylesheet" href="~/lib/assets/css/owl.theme.css">
+    <link rel="stylesheet" href="~/lib/assets/css/owl.transitions.css">
+    <link rel="stylesheet" href="~/lib/assets/css/style.css">
+    <link rel="stylesheet" href="~/lib/assets/css/responsive.css">
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">FUNCIONARIOS</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Funcionario" asp-action="Index">Funcionario</a>
+                        <li class="wow fadeInDown" data-wow-delay="0.1s">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Funcionario" asp-action="Index">Funcionários</a>
+                        
                         </li>
                     </ul>
                 </div>
@@ -40,12 +53,31 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2021 - FUNCIONARIOS - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2021 - FUNCIONARIOS - <a asp-area="" asp-controller="Home" asp-action="Privacy"></a>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="assets/js/modernizr-2.6.2.min.js"></script>
+
+    <script src="~/lib/assets/js/jquery-1.10.2.min.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/lib/assets/js/bootstrap-select.min.js"></script>
+    <script src="~/lib/assets/js/bootstrap-hover-dropdown.js"></script>
+
+    <script src="~/lib/assets/js/easypiechart.min.js"></script>
+    <script src="~/lib/assets/js/jquery.easypiechart.min.js"></script>
+
+    <script src="~/lib/assets/js/owl.carousel.min.js"></script>
+    <script src="~/lib/assets/js/wow.js"></script>
+
+    <script src="~/lib/assets/js/icheck.min.js"></script>
+    <script src="~/lib/assets/js/price-range.js"></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
+    <script src="~/lib/assets/js/gmaps.js"></script>
+    <script src="~/lib/assets/js/gmaps.init.js"></script>
+
+    <script src="~/lib/assets/js/main.js"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

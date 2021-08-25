@@ -84,7 +84,6 @@ namespace FUNCIONARIOS.Controllers
         }
 
         // POST: FuncionarioController/Create
-        // POST: FuncionarioController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Funcionario funcionario)

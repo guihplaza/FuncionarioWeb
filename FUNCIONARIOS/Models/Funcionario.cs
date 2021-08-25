@@ -14,7 +14,7 @@ namespace FUNCIONARIOS.Models
         public string Sexo { get; set; }
         public int Pis { get; set; }
         public string CPF { get; set; }
-        public double Salario { get; set; }
+        public int Salario { get; set; }
         public string Email { get; set; }
         public DateTime Data_admissao { get; set; }
 
