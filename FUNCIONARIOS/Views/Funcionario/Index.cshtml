@@ -4,108 +4,120 @@
     ViewData["Title"] = "Index";
 }
 
-    <br />
-    <div class="row">
-        <div class="col-md-10">
+<br />
+<div class="row">
+    <div class="col-md-10">
 
-        </div>
-        <form asp-action="Index" method="get">
-            <div class="form-actions no-color">
-                <p>
-                    Pesquisar: <input type="text" name="filtro" value="@ViewData["filtroAtual"]" />
-                    <input type="submit" value="Procurar" class="btn btn-primary" /> |
-                    <a class="btn btn-secondary" asp-action="Index">Voltar</a>
-                </p>
-            </div>
-            <div class="col-md-2">
-                <p>
-                    <a class="btn btn-success" asp-action="Create">NOVO</a>
-                </p>
-            </div>
-
-        </form>
     </div>
-    <br />
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">
-                    @*@Html.DisplayNameFor(model => model.SobreNome)*@
-                    <a asp-action="Index" asp-route-ordem="@ViewData["NomeParm"]" asp-route-filtroAtual="@ViewData["filtroAtual"]">Nome</a>
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model[0].Sexo)
-                </th>
-                <th scope="col">
-                    @Html.DisplayNameFor(model => model[0].Pis)
-                </th>
-                <th scope="col">
-                    @*@Html.DisplayNameFor(model => model.SobreNome)*@
-                    <a asp-action="Index" asp-route-ordem="@ViewData["CPF"]" asp-route-filtroAtual="@ViewData["filtroAtual"]">CPF</a>
-                </th>
-                <th scope="col">
-                    @Html.DisplayNameFor(model => model[0].Salario)
-                </th>
-                <th scope="col">
-                    @Html.DisplayNameFor(model => model[0].Email)
-                </th>
-                <th scope="col">
-                    @Html.DisplayNameFor(model => model[0].Data_admissao)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    @*<td>
-                            @Html.DisplayFor(modelItem => item.IdFuncionario)
-                        </td>*@
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nome)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Sexo)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Pis)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CPF)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Salario)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Email)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Data_admissao)
-                    </td>
-                    <td>
-                        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.IdFuncionario">Edit</a> |
-                        @*<a class="btn btn-primary" asp-action="Details" asp-route-id="@item.IdFuncionario">Details</a> |*@
-                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.IdFuncionario">Delete</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-    @{ var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-        var nextDisabled = !Model.HasNextPage ? "disabled" : ""; }
+    <form asp-action="Index" method="get">
+        <div class="form-actions no-color">
+            <p>
+                Pesquisar: <input type="text" name="filtro" value="@ViewData["filtroAtual"]" />
+                <input type="submit" value="Procurar" class="btn btn-primary" /> |
+                <a class="btn btn-secondary" asp-action="Index">Voltar</a>
+            </p>
+        </div>
+        <div class="col-md-2">
+            <p>
+                <a class="btn btn-success" asp-action="Create">NOVO</a>
+            </p>
+        </div>
 
-    <a asp-action="Index"
-       asp-route-ordem="@ViewData["ordemAtual"]"
-       asp-route-pagina="@(Model.PageIndex - 1)"
-       asp-route-filtroAtual="@ViewData["filtroAtual"]"
-       class="btn btn-default @prevDisabled">
-        Anterior
-    </a>
-    <a asp-action="Index"
-       asp-route-ordem="@ViewData["ordemAtual"]"
-       asp-route-pagina="@(Model.PageIndex + 1)"
-       asp-route-filtroAtual="@ViewData["filtroAtual"]"
-       class="btn btn-default @nextDisabled">
-        Próximo
-    </a>
+    </form>
+</div>
+<br />
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">
+                @*@Html.DisplayNameFor(model => model.SobreNome)*@
+                <a asp-action="Index" asp-route-ordem="@ViewData["NomeParm"]" asp-route-filtroAtual="@ViewData["filtroAtual"]">Nome</a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Sexo)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model[0].Pis)
+            </th>
+            <th scope="col">
+                @*@Html.DisplayNameFor(model => model.SobreNome)*@
+                <a asp-action="Index" asp-route-ordem="@ViewData["CPF"]" asp-route-filtroAtual="@ViewData["filtroAtual"]">CPF</a>
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model[0].Salario)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model[0].Email)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model[0].Data_admissao)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.IdFuncionario)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sexo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pis)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CPF)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Salario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data_admissao)
+                </td>
+
+
+
+                <td>
+                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.IdFuncionario">Edit</a> |
+                    @*<a class="btn btn-primary" asp-action="Details" asp-route-id="@item.IdFuncionario">Details</a> |*@
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.IdFuncionario">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="p-3 d-flex justify-content-between">
+    <h4>Dívidas</h4>
+    <div class="d-flex justify-content-between">
+        <h5>
+            <strong>Total:&nbsp;</strong>
+        </h5>
+        <h5 id="saldoTotal">@ViewBag.TotalSalarios</h5>
+    </div>
+</div>
+@{ var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : ""; }
+
+<a asp-action="Index"
+   asp-route-ordem="@ViewData["ordemAtual"]"
+   asp-route-pagina="@(Model.PageIndex - 1)"
+   asp-route-filtroAtual="@ViewData["filtroAtual"]"
+   class="btn btn-default @prevDisabled">
+    Anterior
+</a>
+<a asp-action="Index"
+   asp-route-ordem="@ViewData["ordemAtual"]"
+   asp-route-pagina="@(Model.PageIndex + 1)"
+   asp-route-filtroAtual="@ViewData["filtroAtual"]"
+   class="btn btn-default @nextDisabled">
+    Próximo
+</a>

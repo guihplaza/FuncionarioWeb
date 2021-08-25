@@ -21,6 +21,9 @@ namespace FUNCIONARIOS.Controllers
         // GET: FuncionarioController
         public async Task<IActionResult> Index(string ordem, string filtroAtual, string filtro, int? pagina)
         {
+
+
+
             ViewData["NomeParm"] = String.IsNullOrEmpty(ordem) ? "nome_desc" : "";
             ViewData["CPF"] = ordem == "CPF" ? "cpf_desc" : "Cpf";
 
@@ -192,6 +195,15 @@ namespace FUNCIONARIOS.Controllers
 
                 return RedirectToAction("Delete", new { id = id, saveChangesError = true });
             }
+        }
+
+        public async Task<IActionResult> DespesasSalColaborador()
+        {
+            var funcionario = new Funcionario();
+            funcionario.TotalSalarios = await _context.Funcionarios.OrderByDescending(o => o.Salario).ToListAsync();
+            ViewBag.TotalSalarios = string.Format("{0:c}", funcionario.TotalSalarios.Sum(w => w.Salario));
+
+            return View(funcionario);
         }
     }
 }
