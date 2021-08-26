@@ -2,6 +2,7 @@
 using FUNCIONARIOS.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -21,11 +22,11 @@ namespace FUNCIONARIOS.Controllers
         // GET: FuncionarioController
         public async Task<IActionResult> Index(string ordem, string filtroAtual, string filtro, int? pagina)
         {
-
-
-
             ViewData["NomeParm"] = String.IsNullOrEmpty(ordem) ? "nome_desc" : "";
             ViewData["CPF"] = ordem == "CPF" ? "cpf_desc" : "Cpf";
+
+
+
 
             var funcionarios = from func in _context.Funcionarios
                              select func;
@@ -83,7 +84,9 @@ namespace FUNCIONARIOS.Controllers
         // GET: FuncionarioController/Create
         public ActionResult Create()
         {
+            ViewBag.Sexo = Funcionario.GetSexos().Select(c => new SelectListItem() { Text = c.Sexo, Value = c.Sexo }).ToList();
             return View();
+
         }
 
         // POST: FuncionarioController/Create
@@ -91,6 +94,7 @@ namespace FUNCIONARIOS.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Funcionario funcionario)
         {
+            ViewBag.Sexo = Funcionario.GetSexos().Select(c => new SelectListItem() { Text = c.Sexo, Value = c.Sexo }).ToList();
             try
             {
                 if (ModelState.IsValid)
@@ -203,7 +207,7 @@ namespace FUNCIONARIOS.Controllers
             funcionario.TotalSalarios = await _context.Funcionarios.OrderByDescending(o => o.Salario).ToListAsync();
             ViewBag.TotalSalarios = string.Format("{0:c}", funcionario.TotalSalarios.Sum(w => w.Salario));
 
-            return View(funcionario);
+            return View(funcionario.TotalSalarios);
         }
     }
 }

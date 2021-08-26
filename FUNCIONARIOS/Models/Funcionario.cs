@@ -15,6 +15,7 @@ namespace FUNCIONARIOS.Models
         [Required(ErrorMessage = "O campo Valor deve ser preenchido")]
         public string Nome { get; set; }
         public string Sexo { get; set; }
+
         public int Pis { get; set; }
         public string CPF { get; set; }
 
@@ -28,5 +29,17 @@ namespace FUNCIONARIOS.Models
         [NotMapped]
         public IEnumerable<Funcionario> TotalSalarios { get; set; }
 
+
+        public static List<Funcionario> GetSexos()
+        {
+            var listaSexo = new List<Funcionario>()
+            {
+                new Funcionario(){  Sexo="Masculino"},
+                new Funcionario(){  Sexo="Feminino"},
+                new Funcionario(){  Sexo="Outros"},
+                
+            };
+            return listaSexo;
+        }
     }
 }
