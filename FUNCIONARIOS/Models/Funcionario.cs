@@ -21,14 +21,13 @@ namespace FUNCIONARIOS.Models
 
         [Required(ErrorMessage = "O campo Valor deve ser preenchido")]
         [DataType(DataType.Currency)]
-        public int Salario { get; set; }
+        public Decimal Salario { get; set; }
 
         public string Email { get; set; }
         public DateTime Data_admissao { get; set; }
 
         [NotMapped]
         public IEnumerable<Funcionario> TotalSalarios { get; set; }
-
 
         public static List<Funcionario> GetSexos()
         {
