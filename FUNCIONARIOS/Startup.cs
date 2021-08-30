@@ -32,6 +32,7 @@ namespace FUNCIONARIOS
             // Add framework services.
             services.AddDbContext<EmpresaContexto>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
             // Add framework services.
             services.AddMvc();
         }
