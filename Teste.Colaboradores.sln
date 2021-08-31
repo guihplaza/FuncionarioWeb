@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.31613.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Teste.Colaboradores.Web", "FUNCIONARIOS\Teste.Colaboradores.Web.csproj", "{6F70B7D2-CDA0-46C5-8964-690ACE0277D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Teste.Colaboradores.Domain", "Teste.Colaboradores.Domain\Teste.Colaboradores.Domain.csproj", "{8F1074D6-DC66-4567-B35C-7B3E072E23DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Teste.Colaboradores.Domain", "Teste.Colaboradores.Domain\Teste.Colaboradores.Domain.csproj", "{8F1074D6-DC66-4567-B35C-7B3E072E23DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Teste.Colaboradores.DataAccess", "Teste.Colaboradores.DataAccess\Teste.Colaboradores.DataAccess.csproj", "{EAF08BFA-5B5F-44EF-81F0-84E8915BF995}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Teste.Colaboradores.DataAccess", "Teste.Colaboradores.DataAccess\Teste.Colaboradores.DataAccess.csproj", "{EAF08BFA-5B5F-44EF-81F0-84E8915BF995}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

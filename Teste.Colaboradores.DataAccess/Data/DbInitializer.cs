@@ -11,10 +11,10 @@ namespace FUNCIONARIOS.Data
         {
             context.Database.EnsureCreated();
 
-            // procura por qualquer estudante
+            
             if (context.Funcionarios.Any())
             {
-                return;  //O banco foi inicializado
+                return;  
             }
         }
     }

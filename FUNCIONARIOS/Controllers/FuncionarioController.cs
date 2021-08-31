@@ -66,8 +66,6 @@ namespace FUNCIONARIOS.Controllers
             {
                 return NotFound();
             }
-            //var estudante = await _context.Estudantes
-            //    .SingleOrDefaultAsync(m => m.EstudanteID == id);
 
             var funcionario = await _context.Funcionarios
                 .Include(s => s.IdFuncionario)
@@ -122,9 +120,9 @@ namespace FUNCIONARIOS.Controllers
             {
                 return NotFound();
             }
-            var estudante = await _context.Funcionarios.SingleOrDefaultAsync(s => s.IdFuncionario == id);
+            var funcionario = await _context.Funcionarios.SingleOrDefaultAsync(s => s.IdFuncionario == id);
 
-            return View(estudante);
+            return View(funcionario);
         }
 
         // POST: FuncionarioController/Edit/5
