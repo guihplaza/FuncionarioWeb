@@ -8,16 +8,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Teste.Colaboradores.BusinessLogic.Services;
 
 namespace FUNCIONARIOS.Controllers
 {
     public class FuncionarioController : Controller
     {
-        private readonly EmpresaContexto _context;
+        private readonly IFuncionarioServices _FuncionarioService;
 
-        public FuncionarioController(EmpresaContexto context)
+        public FuncionarioController(IFuncionarioServices funcionarioService)
         {
-            _context = context;
+            _FuncionarioService = funcionarioService;
         }
         // GET: FuncionarioController
         public async Task<IActionResult> Index(string ordem, string filtroAtual, string filtro, int? pagina)
@@ -25,11 +26,8 @@ namespace FUNCIONARIOS.Controllers
             ViewData["NomeParm"] = String.IsNullOrEmpty(ordem) ? "nome_desc" : "";
             ViewData["CPF"] = ordem == "CPF" ? "cpf_desc" : "Cpf";
 
+            var funcionarios = _FuncionarioService.Listar();
 
-
-
-            var funcionarios = from func in _context.Funcionarios
-                             select func;
             if (filtro != null)
             {
                 pagina = 1;
@@ -41,42 +39,27 @@ namespace FUNCIONARIOS.Controllers
 
             if (!String.IsNullOrEmpty(filtro))
             {
-                funcionarios = funcionarios.Where(s => s.Nome.Contains(filtro)
+                 funcionarios = _FuncionarioService.Listar(s => s.Nome.Contains(filtro)
                                        || s.CPF.Contains(filtro));
+                //funcionarios = funcionarios.Where(s => s.Nome.Contains(filtro)
+                //                       || s.CPF.Contains(filtro));
+
+                //_FuncionarioService.Listar(w => w.Nom_Login.ToUpper() == model.Nom_Login.ToUpper() &&
+                //                                          w.Des_Senha == UtilServices.Encriptar(model.Des_Senha));
             }
 
             switch (ordem)
             {
                 case "nome_desc":
-                    funcionarios = funcionarios.OrderByDescending(func => func.Nome);
+                    funcionarios = funcionarios.OrderByDescending(w => w.Nome).ToList();
                     break;
                 case "Cpf":
-                    funcionarios = funcionarios.OrderBy(func => func.CPF);
+                    funcionarios = funcionarios.OrderByDescending(w => w.CPF).ToList();
                     break;
 
             }
             int pageSize = 3;
-            return View(await PaginatedList<Funcionario>.CreateAsync(funcionarios.AsNoTracking(), pagina ?? 1, pageSize));
-        }
-
-        // GET: FuncionarioController/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var funcionario = await _context.Funcionarios
-                .Include(s => s.IdFuncionario)
-                .AsNoTracking()
-                .SingleOrDefaultAsync(m => m.IdFuncionario == id);
-
-            if (funcionario == null)
-            {
-                return NotFound();
-            }
-            return View(funcionario);
+            return View(await PaginatedList<Funcionario>.CreateAsync(funcionarios.AsQueryable(), pagina ?? 1, pageSize));
         }
 
         // GET: FuncionarioController/Create
@@ -93,18 +76,18 @@ namespace FUNCIONARIOS.Controllers
         public async Task<IActionResult> Create(Funcionario funcionario)
         {
             ViewBag.Sexo = Funcionario.GetSexos().Select(c => new SelectListItem() { Text = c.Sexo, Value = c.Sexo }).ToList();
+
             try
             {
                 if (ModelState.IsValid)
                 {
-                    _context.Add(funcionario);
-                    await _context.SaveChangesAsync();
+                    _FuncionarioService.inserir(funcionario);
                     return RedirectToAction("Index");
                 }
             }
             catch (DbUpdateException /* ex */)
             {
-                //Logar o erro (descomente a variável ex e escreva um log
+    
                 ModelState.AddModelError("", "Não foi possível salvar. " +
                     "Tente novamente, e se o problema persistir " +
                     "chame o suporte.");
@@ -116,11 +99,7 @@ namespace FUNCIONARIOS.Controllers
         // GET: FuncionarioController/Edit/5
         public async Task<IActionResult> Edit(int id)
         {
-            if (id == 0)
-            {
-                return NotFound();
-            }
-            var funcionario = await _context.Funcionarios.SingleOrDefaultAsync(s => s.IdFuncionario == id);
+            var funcionario = _FuncionarioService.GetById(s => s.IdFuncionario == id);
 
             return View(funcionario);
         }
@@ -134,7 +113,7 @@ namespace FUNCIONARIOS.Controllers
             {
                 return NotFound();
             }
-            var atualizarFuncionario = await _context.Funcionarios.SingleOrDefaultAsync(s => s.IdFuncionario == id);
+            var atualizarFuncionario = _FuncionarioService.GetById(s => s.IdFuncionario == id);
             if (await TryUpdateModelAsync<Funcionario>(
                 atualizarFuncionario,
                 "",
@@ -142,7 +121,7 @@ namespace FUNCIONARIOS.Controllers
             {
                 try
                 {
-                    await _context.SaveChangesAsync();
+                    _FuncionarioService.GetById(s => s.IdFuncionario == id);
                     return RedirectToAction("Index");
                 }
                 catch (DbUpdateException)
@@ -158,12 +137,8 @@ namespace FUNCIONARIOS.Controllers
         // GET: FuncionarioController/Delete/5
         public async Task<IActionResult> Delete(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var funcionario = await _context.Funcionarios.FirstOrDefaultAsync(s => s.IdFuncionario == id);
+            var funcionario = _FuncionarioService.GetById(s => s.IdFuncionario == id);
 
 
             return View(funcionario);
@@ -174,22 +149,16 @@ namespace FUNCIONARIOS.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var funcionario = await _context.Funcionarios
-                .AsNoTracking()
-                .SingleOrDefaultAsync(m => m.IdFuncionario == id);
+            var funcionario = _FuncionarioService.GetById(m => m.IdFuncionario == id);
             if (funcionario == null)
             {
                 return RedirectToAction("Index");
             }
             try
             {
-                _context.Funcionarios.Remove(funcionario);
-                await _context.SaveChangesAsync();
+                _FuncionarioService.excluir(funcionario.IdFuncionario);
+
                 return RedirectToAction("Index");
             }
             catch (DbUpdateException)
@@ -202,7 +171,12 @@ namespace FUNCIONARIOS.Controllers
         public async Task<IActionResult> DespesasSalColaborador()
         {
             var funcionario = new Funcionario();
-            funcionario.TotalSalarios = await _context.Funcionarios.OrderByDescending(o => o.Salario).ToListAsync();
+            var funcionarios = _FuncionarioService.Listar();
+
+            funcionario.TotalSalarios = funcionarios.OrderByDescending(o => o.Salario).ToList();
+
+            //funcionario.TotalSalarios = await _context.Funcionarios.OrderByDescending(o => o.Salario).ToListAsync();
+
             ViewBag.TotalSalarios = string.Format("{0:c}", funcionario.TotalSalarios.Sum(w => w.Salario));
 
             return View(funcionario.TotalSalarios);

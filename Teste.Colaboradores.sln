@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Teste.Colaboradores.Domain"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Teste.Colaboradores.DataAccess", "Teste.Colaboradores.DataAccess\Teste.Colaboradores.DataAccess.csproj", "{EAF08BFA-5B5F-44EF-81F0-84E8915BF995}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Teste.Colaboradores.BusinessLogic", "Teste.Colaboradores.BusinessLogic\Teste.Colaboradores.BusinessLogic.csproj", "{D7F0D5A5-37B8-4B1E-BAD3-192684752FE6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{EAF08BFA-5B5F-44EF-81F0-84E8915BF995}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EAF08BFA-5B5F-44EF-81F0-84E8915BF995}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EAF08BFA-5B5F-44EF-81F0-84E8915BF995}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7F0D5A5-37B8-4B1E-BAD3-192684752FE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7F0D5A5-37B8-4B1E-BAD3-192684752FE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7F0D5A5-37B8-4B1E-BAD3-192684752FE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7F0D5A5-37B8-4B1E-BAD3-192684752FE6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

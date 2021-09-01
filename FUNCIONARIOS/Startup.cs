@@ -1,5 +1,6 @@
 using Castle.Core.Logging;
 using FUNCIONARIOS.Data;
+using FUNCIONARIOS.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -14,6 +15,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using Teste.Colaboradores.BusinessLogic.Interface;
+using Teste.Colaboradores.BusinessLogic.Repository;
+using Teste.Colaboradores.BusinessLogic.Services;
 
 namespace FUNCIONARIOS
 {
@@ -29,12 +33,20 @@ namespace FUNCIONARIOS
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            AppConfiguration.ConnectionString = Configuration.GetConnectionString("DefaultConnection");
             // Add framework services.
-            services.AddDbContext<EmpresaContexto>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            //services.AddDbContext<EmpresaContexto>(options =>
+            //    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddSession();            
+
+            services.AddMemoryCache();
             // Add framework services.
-            services.AddMvc();
+            services.AddControllersWithViews();
+
+
+            services.AddTransient<IFuncionarioServices, FuncionarioServices>();
+            services.AddTransient<IFuncionarioRepository, FuncionarioRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -67,6 +79,8 @@ namespace FUNCIONARIOS
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors();
 
             app.UseEndpoints(endpoints =>
             {
