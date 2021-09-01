@@ -12,7 +12,7 @@ namespace Teste.Colaboradores.BusinessLogic.Repository
 {
     public class FuncionarioRepository : IFuncionarioRepository
     {
-        EmpresaContexto _context;
+        private readonly EmpresaContexto _context;
 
         public FuncionarioRepository(EmpresaContexto context)
         {

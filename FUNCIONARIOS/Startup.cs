@@ -3,6 +3,7 @@ using FUNCIONARIOS.Data;
 using FUNCIONARIOS.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
@@ -33,20 +34,32 @@ namespace FUNCIONARIOS
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
             AppConfiguration.ConnectionString = Configuration.GetConnectionString("DefaultConnection");
+
             // Add framework services.
-            //services.AddDbContext<EmpresaContexto>(options =>
-            //    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<EmpresaContexto>(options => options.UseSqlServer(AppConfiguration.ConnectionString));
 
-            services.AddSession();            
+            services.AddScoped<IFuncionarioServices, FuncionarioServices>();
+            services.AddScoped<IFuncionarioRepository, FuncionarioRepository>();
 
-            services.AddMemoryCache();
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(20);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             // Add framework services.
-            services.AddControllersWithViews();
-
-
-            services.AddTransient<IFuncionarioServices, FuncionarioServices>();
-            services.AddTransient<IFuncionarioRepository, FuncionarioRepository>();
+            services.AddControllersWithViews();            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -77,10 +90,8 @@ namespace FUNCIONARIOS
             app.UseStaticFiles();
 
             app.UseRouting();
-
-            app.UseAuthorization();
-
             app.UseCors();
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

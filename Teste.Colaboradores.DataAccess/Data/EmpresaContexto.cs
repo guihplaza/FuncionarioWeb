@@ -12,9 +12,7 @@ namespace FUNCIONARIOS.Data
         public EmpresaContexto(DbContextOptions<EmpresaContexto> options) : base(options)
         {
 
-        }
-
-        public DbSet<Funcionario> Funcionarios { get; set; }
+        }        
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -31,6 +29,8 @@ namespace FUNCIONARIOS.Data
                                        //Configuration.GetConnectionString("ConexaoMySql:MySqlConnectionString"));
             }
         }
-    }
 
+        public DbSet<Funcionario> Funcionarios { get; set; }
+
+    }
 }

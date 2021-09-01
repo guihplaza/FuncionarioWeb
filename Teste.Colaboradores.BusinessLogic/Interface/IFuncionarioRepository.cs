@@ -19,5 +19,7 @@ namespace Teste.Colaboradores.BusinessLogic.Interface
         IList<Funcionario> Listar();
 
         IList<Funcionario> Listar(Expression<Func<Funcionario, bool>> predicate);
+
+        Funcionario PegarFuncionario(Expression<Func<Funcionario, bool>> predicate);
     }
 }

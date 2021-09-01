@@ -5,14 +5,15 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using Teste.Colaboradores.BusinessLogic.Interface;
 using Teste.Colaboradores.BusinessLogic.Repository;
 
 namespace Teste.Colaboradores.BusinessLogic.Services
 {
     public class FuncionarioServices : IFuncionarioServices
     {
-        FuncionarioRepository _repositorio;
-        public FuncionarioServices(FuncionarioRepository funcionarioRepository)
+        private readonly IFuncionarioRepository _repositorio;
+        public FuncionarioServices(IFuncionarioRepository funcionarioRepository)
         {
             _repositorio = funcionarioRepository;
         }

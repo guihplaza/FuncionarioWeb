@@ -40,12 +40,7 @@ namespace FUNCIONARIOS.Controllers
             if (!String.IsNullOrEmpty(filtro))
             {
                  funcionarios = _FuncionarioService.Listar(s => s.Nome.Contains(filtro)
-                                       || s.CPF.Contains(filtro));
-                //funcionarios = funcionarios.Where(s => s.Nome.Contains(filtro)
-                //                       || s.CPF.Contains(filtro));
-
-                //_FuncionarioService.Listar(w => w.Nom_Login.ToUpper() == model.Nom_Login.ToUpper() &&
-                //                                          w.Des_Senha == UtilServices.Encriptar(model.Des_Senha));
+                                       || s.CPF.Contains(filtro));                                    w.Des_Senha == UtilServices.Encriptar(model.Des_Senha));
             }
 
             switch (ordem)
@@ -59,7 +54,7 @@ namespace FUNCIONARIOS.Controllers
 
             }
             int pageSize = 3;
-            return View(await PaginatedList<Funcionario>.CreateAsync(funcionarios.AsQueryable(), pagina ?? 1, pageSize));
+            return View(PaginatedList<Funcionario>.CreateAsync(funcionarios.AsQueryable(), pagina ?? 1, pageSize));
         }
 
         // GET: FuncionarioController/Create
