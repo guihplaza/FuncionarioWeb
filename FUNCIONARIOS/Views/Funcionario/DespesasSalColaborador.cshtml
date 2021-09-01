@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<FUNCIONARIOS.Models.Funcionario>
 
 @{
-    ViewData["Title"] = "DespesasSalColaborador";
+    ViewData["Title"] = "DESPESAS";
 }
 
 <h2>Despesas com Salários</h2>
@@ -11,8 +11,8 @@
     </p>*@
 
 
-<table class="table">
-    <thead>
+<table class="table table-striped">
+    <thead class="thead-dark">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.IdFuncionario)
@@ -45,9 +45,6 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdFuncionario)
-                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Nome)
                 </td>
