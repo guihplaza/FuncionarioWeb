@@ -7,8 +7,8 @@
 <br />
 
 <br />
-<table class="table">
-    <thead>
+<table class="table table-striped">
+    <thead class="thead-dark">
         <tr>
             <th scope="col">
                 <a asp-action="Index" asp-route-ordem="@ViewData["NomeParm"]" asp-route-filtroAtual="@ViewData["filtroAtual"]">Nome</a>
@@ -59,9 +59,6 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Data_admissao)
                 </td>
-
-
-
                 <td>
                     <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.IdFuncionario">Editar</a> |
                     <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.IdFuncionario">Deletar</a>
