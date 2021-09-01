@@ -20,7 +20,7 @@ namespace FUNCIONARIOS.Controllers
         {
             _FuncionarioService = funcionarioService;
         }
-        // GET: FuncionarioController
+
         public async Task<IActionResult> Index(string ordem, string filtroAtual, string filtro, int? pagina)
         {
             ViewData["NomeParm"] = String.IsNullOrEmpty(ordem) ? "nome_desc" : "";
@@ -30,17 +30,16 @@ namespace FUNCIONARIOS.Controllers
 
             if (filtro != null)
             {
-                pagina = 1;
+                 pagina = 1;
             }
             else
             {
-                filtro = filtroAtual;
+                 filtro = filtroAtual;
             }
 
             if (!String.IsNullOrEmpty(filtro))
             {
-                 funcionarios = _FuncionarioService.Listar(s => s.Nome.Contains(filtro)
-                                       || s.CPF.Contains(filtro));
+                 funcionarios = _FuncionarioService.Listar(s => s.Nome.Contains(filtro)||s.CPF.Contains(filtro));
             }
 
             switch (ordem)
@@ -57,21 +56,17 @@ namespace FUNCIONARIOS.Controllers
             return View(PaginatedList<Funcionario>.CreateAsync(funcionarios.AsQueryable(), pagina ?? 1, pageSize));
         }
 
-        // GET: FuncionarioController/Create
         public ActionResult Create()
         {
             ViewBag.Sexo = Funcionario.GetSexos().Select(c => new SelectListItem() { Text = c.Sexo, Value = c.Sexo }).ToList();
             return View();
-
         }
 
-        // POST: FuncionarioController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Funcionario funcionario)
         {
             ViewBag.Sexo = Funcionario.GetSexos().Select(c => new SelectListItem() { Text = c.Sexo, Value = c.Sexo }).ToList();
-
             try
             {
                 if (ModelState.IsValid)
@@ -80,26 +75,19 @@ namespace FUNCIONARIOS.Controllers
                     return RedirectToAction("Index");
                 }
             }
-            catch (DbUpdateException /* ex */)
+            catch (Exception ex)
             {
-    
-                ModelState.AddModelError("", "Não foi possível salvar. " +
-                    "Tente novamente, e se o problema persistir " +
-                    "chame o suporte.");
+                ModelState.AddModelError("", ex.Message);
             }
-
             return View(funcionario);
         }
 
-        // GET: FuncionarioController/Edit/5
         public async Task<IActionResult> Edit(int id)
         {
             var funcionario = _FuncionarioService.GetById(s => s.IdFuncionario == id);
-
             return View(funcionario);
         }
 
-        // POST: FuncionarioController/Edit/5
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditPost(int? id)
@@ -115,27 +103,20 @@ namespace FUNCIONARIOS.Controllers
                     _FuncionarioService.alterar(atualizarFuncionario);
                     return RedirectToAction("Index");
                 }
-                catch (DbUpdateException)
+                catch (Exception ex)
                 {
-                    ModelState.AddModelError("", "Não foi possível salvar. " +
-                        "Tente novamente, e se o problema persistir " +
-                        "chame o suporte.");
+                    ModelState.AddModelError("", ex.Message);
                 }
             }
             return View(atualizarFuncionario);
         }
 
-        // GET: FuncionarioController/Delete/5
         public async Task<IActionResult> Delete(int id)
         {
-
             var funcionario = _FuncionarioService.GetById(s => s.IdFuncionario == id);
-
-
             return View(funcionario);
         }
 
-        // POST: FuncionarioController/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -165,8 +146,6 @@ namespace FUNCIONARIOS.Controllers
             var funcionarios = _FuncionarioService.Listar();
 
             funcionario.TotalSalarios = funcionarios.OrderByDescending(o => o.Salario).ToList();
-
-            //funcionario.TotalSalarios = await _context.Funcionarios.OrderByDescending(o => o.Salario).ToListAsync();
 
             ViewBag.TotalSalarios = string.Format("{0:c}", funcionario.TotalSalarios.Sum(w => w.Salario));
 

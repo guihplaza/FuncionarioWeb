@@ -11,7 +11,6 @@
     <thead>
         <tr>
             <th scope="col">
-                @*@Html.DisplayNameFor(model => model.SobreNome)*@
                 <a asp-action="Index" asp-route-ordem="@ViewData["NomeParm"]" asp-route-filtroAtual="@ViewData["filtroAtual"]">Nome</a>
             </th>
             <th>
@@ -21,7 +20,6 @@
                 @Html.DisplayNameFor(model => model[0].Pis)
             </th>
             <th scope="col">
-                @*@Html.DisplayNameFor(model => model.SobreNome)*@
                 <a asp-action="Index" asp-route-ordem="@ViewData["CPF"]" asp-route-filtroAtual="@ViewData["filtroAtual"]">CPF</a>
             </th>
             <th scope="col">
@@ -40,9 +38,6 @@
         @foreach (var item in Model)
         {
             <tr>
-                @*<td>
-                        @Html.DisplayFor(modelItem => item.IdFuncionario)
-                  </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.Nome)
                 </td>
@@ -69,7 +64,6 @@
 
                 <td>
                     <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.IdFuncionario">Editar</a> |
-                    @*<a class="btn btn-primary" asp-action="Details" asp-route-id="@item.IdFuncionario">Details</a> |*@
                     <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.IdFuncionario">Deletar</a>
                 </td>
             </tr>
