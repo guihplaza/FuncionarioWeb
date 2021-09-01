@@ -40,7 +40,7 @@ namespace FUNCIONARIOS.Controllers
             if (!String.IsNullOrEmpty(filtro))
             {
                  funcionarios = _FuncionarioService.Listar(s => s.Nome.Contains(filtro)
-                                       || s.CPF.Contains(filtro));                                    w.Des_Senha == UtilServices.Encriptar(model.Des_Senha));
+                                       || s.CPF.Contains(filtro));
             }
 
             switch (ordem)
@@ -104,10 +104,6 @@ namespace FUNCIONARIOS.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditPost(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
             var atualizarFuncionario = _FuncionarioService.GetById(s => s.IdFuncionario == id);
             if (await TryUpdateModelAsync<Funcionario>(
                 atualizarFuncionario,
@@ -116,7 +112,7 @@ namespace FUNCIONARIOS.Controllers
             {
                 try
                 {
-                    _FuncionarioService.GetById(s => s.IdFuncionario == id);
+                    _FuncionarioService.alterar(atualizarFuncionario);
                     return RedirectToAction("Index");
                 }
                 catch (DbUpdateException)
