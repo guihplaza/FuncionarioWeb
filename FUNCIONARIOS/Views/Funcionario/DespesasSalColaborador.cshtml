@@ -6,17 +6,10 @@
 
 <h2>Despesas com Salários</h2>
 
-@*<p>
-        <a asp-action="Create">Create New</a>
-    </p>*@
-
 
 <table class="table table-striped">
     <thead class="thead-dark">
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.IdFuncionario)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Nome)
             </th>
@@ -44,34 +37,29 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Sexo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Pis)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CPF)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Salario)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Data_admissao)
-                </td>
-                @*<td>
-                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                    </td>*@
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sexo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CPF)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Salario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Data_admissao)
+            </td>
+        </tr>
         }
     </tbody>
 
