@@ -1,0 +1,13 @@
+CREATE TABLE [dbo].[Funcionario] (
+    [IdFuncionario] INT             IDENTITY (1, 1) NOT NULL,
+    [Nome]          VARCHAR (250)   NOT NULL,
+    [Sexo]          VARCHAR (15)    NULL,
+    [PIS]           INT             NULL,
+    [CPF]           VARCHAR (50)    NOT NULL,
+    [Salario]       DECIMAL (18, 2) NULL,
+    [Email]         VARCHAR (50)    NULL,
+    [Data_admissao] DATE            NULL,
+    PRIMARY KEY CLUSTERED ([IdFuncionario] ASC)
+);
+
+CONEXAO DEFINIDA COM O NOME DE: Database=Funcionario
