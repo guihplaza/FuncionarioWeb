@@ -76,14 +76,14 @@
    asp-route-pagina="@(Model.PageIndex - 1)"
    asp-route-filtroAtual="@ViewData["filtroAtual"]"
    class="btn btn-default @prevDisabled">
-    < <!--ANTERIOR-->
+    <strong><</strong> <!--ANTERIOR-->
 </a>
 <a asp-action="Index"
    asp-route-ordem="@ViewData["ordemAtual"]"
    asp-route-pagina="@(Model.PageIndex + 1)"
    asp-route-filtroAtual="@ViewData["filtroAtual"]"
    class="btn btn-default @nextDisabled">
-    > <!--PROXIMO-->
+    <strong>></strong> <!--PROXIMO-->
 </a>
 @*<form asp-action="Index" method="get">
     <div class="form-actions no-color">
