@@ -11,3 +11,4 @@ CREATE TABLE [dbo].[Funcionario] (
 );
 
 CONEXAO DEFINIDA COM O NOME DE: Database=Funcionario
+TESTE
